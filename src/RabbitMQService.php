@@ -5,15 +5,25 @@ namespace Service;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-abstract class Service
+abstract class RabbitMQService
 {
+    /**
+     * Название очереди
+     */
     const QUEUE_NAME = 'event_queue';
 
+    /**
+     * @var AMQPStreamConnection
+     */
     protected $connection;
+
+    /**
+     * @var \PhpAmqpLib\Channel\AMQPChannel
+     */
     protected $channel;
 
     /**
-     * Service constructor.
+     * Подключение к очереди в RabbitMQ (общее для отправителя и получателя сообщений)
      */
     public function __construct()
     {
